@@ -5,37 +5,42 @@ import Spinner from '../spinner/spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
 
 export default class RandomChar extends Component {
-	constructor(){
-		super();
-		this.updateChar();
-		this.updateChar = this.updateChar.bind(this)
-	}
 	
 	state = {
 		char: {},
 		error: false
 	}
-	onCharLoaded = (char) => this.setState({char})
+	onCharLoaded = (char) => {
+		this.setState({char: char})
+	}
 	onError = () => {
 		this.setState({
 			error: true
 		})
 	}
-	updateChar(){
+	updateChar = () => {
+		
 		const gotService = new GetResource();
 		const id = Math.floor(Math.random()*140 + 25);
 		gotService.getCharacter(id)
-			.then(this.onCharLoaded)
+			.then((res) => this.onCharLoaded(res))
 			.catch(this.onError);
 	}
-
+	UNSAFE_componentWillMount(){
+		this.updateChar();
+		// this.timerId = setInterval(this.updateChar, 1000);
+	}
+	
+	componentWillUnmount(){
+		clearInterval(this.timerId);
+	}
 	render() {
 		
-		const showContent = this.state.error ? <ErrorMessage/> : <CharacterList state={this.state}/>,
+		const showContent = this.state.error ? <ErrorMessage/> : <CharacterList propertiesChar={this.state.char}/>,
 		 	RandomBlock = styled.div`
 			background-color: #fff;
 			padding: 25px 25px 15px 25px;
-			margin-bottom: 40px;
+			margin-bottom: 10px;
 			border-radius: 0.25rem;
 			h4 {
 				margin-bottom: 20px;
@@ -44,7 +49,7 @@ export default class RandomChar extends Component {
 				 justify-content: space-between;
 				 align-items: center;
 				 span{
-					 color: blue;
+					 color: #436672;
 					 :first-child{
 						 font-size: 16px;
 						 color: #000;
@@ -59,18 +64,45 @@ export default class RandomChar extends Component {
 				padding-left: 5px;
 				padding-right: 5px;
 			}
-			`
+			.buttonChangeChar{
+				display: flex;
+				justify-content: flex-end;
+				margin: 10px;
+			}
+			`,
+			Button = styled.button`
+				padding: 5px 20px;
+				background-color: #A8B5BD;
+				border-radius: 3px;
+				box-shadow: 1px 1px 3px;
+				transition: all 0.1s;
+				border: none;
+				
+				:active{
+					border: none;
+					outline: none;
+					transform: translate(1px, 1px);
+				}
+				:hover{
+					
+				}
+				`
         return (
             <RandomBlock>
                {showContent}
+					<div className="buttonChangeChar">
+						<Button onClick={this.updateChar}>Change characters</Button>
+					</div>
+					
+				
             </RandomBlock>
         );
     }
 }
 
-const CharacterList = ({state:{char}}) => {
-	
-	const {name, gender, born, died, culture } = char;
+const CharacterList = (props) => {
+
+	const {name, gender, born, died, culture } = props.propertiesChar;
 	return (
 		<>
 		 	<h4><span>Random Character:</span> <span>{name || <Spinner/>}</span></h4>
@@ -95,4 +127,3 @@ const CharacterList = ({state:{char}}) => {
 		</>
 	)
 }
-
