@@ -35,9 +35,9 @@ export default class GetResource {
 		return res.map(this._transformHouse);
 	}
 	getHouse =  async(id) => {
-	
-		const res = await this.fetchResource(`/houses/${id}`);
 		
+		const res = await this.fetchResource(`/houses/${id}`);
+		console.log(res)
 		return this._transformHouse(res);
 	}
 	_transformCharacter(char){
@@ -48,7 +48,7 @@ export default class GetResource {
 			born: char.born || 'unknown',
 			died: char.died || 'unknown',
 			culture: char.culture || 'unknown',
-			id: +char.url.match(/\d/g).join('')
+			id: char.url.match(/\d/g).join('')
 		}
 	}
 	_transformHouse(house){
@@ -56,10 +56,8 @@ export default class GetResource {
 			name: house.name || 'unknown',
 			region: house.region || 'unknown',
 			words:house.words || 'unknown',
-			titles: house.titles || 'unknown',
-			overlord: house.overlord || 'unknown',
-			ancestralWeapons: house.ancestralWeapons,
-			id: +house.url.match(/\d/g).join('')
+			ancestralWeapons: house.ancestralWeapons[0]  || 'unknown',
+			id: house.url.match(/\d/g).join('')
 		}
 	}
 

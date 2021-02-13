@@ -4,10 +4,13 @@ import RowBlock from '../../rowBlock/rowBlock';
 import ErrorMessage from '../../errorMessage/errorMessage';
 import GetResource from '../../../services/gotService';
 import {withRouter} from 'react-router-dom';
+import {Col, Row} from 'reactstrap';
+import RandomChar from '../../randomChar/randomChar';
 
 class TemplatePage extends Component {
 
 	state = {
+		showHideCard: true,
 		error: false,
 		isItemDetails: false
 	}
@@ -16,6 +19,9 @@ class TemplatePage extends Component {
 	
 	componentDidCatch(){
 		this.setState({error: true})
+	}
+	toggelCardCharacter = () => {
+		this.setState({showHideCard: !this.state.showHideCard})
 	}
 
 	render(){
@@ -31,7 +37,26 @@ class TemplatePage extends Component {
 				getData = {this.gotService[this.props.methodForAllItems]}
 			/>
 		)
-		return !this.state.isItemDetails ? <RowBlock left={itemList} /> : null;
+		
+		if(!this.state.isItemDetails) {
+			const characterList = this.state.showHideCard ? <RandomChar interval={10000}/> : null;
+			return 	(
+				<>
+				<Row>
+					<Col lg={{size: 6, offset: 0}} >
+						<RowBlock left={itemList}/>
+					</Col>
+					<Col lg={{size: 6, offset: 0}}>
+						{characterList}
+							<button onClick={this.toggelCardCharacter}>show/hide card with characters</button>
+					</Col>
+				</Row>
+				</>
+			)
+		}else{
+			return null;
+		}
 	}
 }
 export default withRouter(TemplatePage);
+

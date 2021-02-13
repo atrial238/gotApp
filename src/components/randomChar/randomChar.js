@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import GetResource from '../../services/gotService';
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
-
+import PropTypes from 'prop-types';
 export default class RandomChar extends Component {
 	
 	state = {
@@ -19,7 +19,6 @@ export default class RandomChar extends Component {
 		})
 	}
 	updateChar = () => {
-		
 		const gotService = new GetResource();
 		const id = Math.floor(Math.random()*140 + 25);
 		gotService.getCharacter(id)
@@ -28,7 +27,8 @@ export default class RandomChar extends Component {
 	}
 	UNSAFE_componentWillMount(){
 		this.updateChar();
-		// this.timerId = setInterval(this.updateChar, 1000);
+		this.timerId = setInterval(this.updateChar, this.props.interval);
+		
 	}
 	
 	componentWillUnmount(){
@@ -93,11 +93,24 @@ export default class RandomChar extends Component {
 					<div className="buttonChangeChar">
 						<Button onClick={this.updateChar}>Change characters</Button>
 					</div>
-					
-				
             </RandomBlock>
         );
     }
+}
+
+RandomChar.defaultProps = {
+	interval: 1000
+}
+RandomChar.propTypes = {
+	interval: PropTypes.number
+	// interval: (props, propName, componentName) => {
+
+	// 	const value = props[propName];
+	// 	if(typeof value === 'number' && !isNaN(value) ){
+	// 		return null
+	// 	}
+	// 	return new TypeError(`${componentName}: ${propName} must be a number`);
+	// }
 }
 
 const CharacterList = (props) => {

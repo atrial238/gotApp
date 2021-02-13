@@ -82,7 +82,7 @@ export default class ItemDetails extends Component {
 								
 								return React.cloneElement(child, {item})
 							 })
-						 }
+						  }
                 </ul>
             </ItemDetails>
         );
