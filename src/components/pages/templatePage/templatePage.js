@@ -37,9 +37,15 @@ class TemplatePage extends Component {
 				getData = {this.gotService[this.props.methodForAllItems]}
 			/>
 		)
-		
+	
 		if(!this.state.isItemDetails) {
-			const characterList = this.state.showHideCard ? <RandomChar interval={10000}/> : null;
+			const characterList = this.state.showHideCard ? <RandomChar 
+																				typeDetailList={this.props.typeDetailList} 
+																				interval={100000}
+																				titleButton={this.props.titleButton}
+																				methodForItem={this.props.methodForItem}
+																				randomId={this.props.randomId}
+																			/> : null;
 			return 	(
 				<>
 				<Row>

@@ -9,7 +9,6 @@ import BooksItem from '../pages/booksItem/booksItem';
 import HouseItem from '../pages/houseItem/houseItem';
 import CharacterItem from '../pages/characterItem/characterItem';
 import MainPage from '../mainPage/mainPage';
-
 import {BrowserRouter as Router, Route, Switch, useLocation} from 'react-router-dom';
 
 import './app.css';
@@ -21,7 +20,7 @@ export default class App extends Component {
 		error: false
 	}
 	componentDidCatch(){
-		console.log('error');
+		
 		this.setState({error: true})
 	}
 	
@@ -29,7 +28,6 @@ export default class App extends Component {
 		if(this.state.error){
 			return <ErrorMessage/>
 		}
-		
 		
 		return (
 			<Router>

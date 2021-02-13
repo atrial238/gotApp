@@ -55,7 +55,7 @@ export default class GetResource {
 		return {
 			name: house.name || 'unknown',
 			region: house.region || 'unknown',
-			words:house.words || 'unknown',
+			words: house.words || 'unknown',
 			ancestralWeapons: house.ancestralWeapons[0]  || 'unknown',
 			id: house.url.match(/\d/g).join('')
 		}

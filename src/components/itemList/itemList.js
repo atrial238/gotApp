@@ -1,11 +1,25 @@
-import React, {Component} from 'react';
+import React, {useState, useEffect} from 'react';
 import './itemList.css';
 import styled from 'styled-components';
 import Spinner from '../spinner/spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
 
-const ItemList = (props) => {
-
+const ItemList = ({getData, onItemSelected}) => {
+	const [itemList, updateList] = useState([]);
+	const [error, updateError] = useState(false);
+	
+	useEffect(() => {
+		getData()
+			.then((itemList) => {
+				console.log(itemList)
+				updateList(itemList);
+			})
+			.catch(() => {
+				updateError(error =>  error = true);
+			})
+	}, [])
+	
+	
 	const renderItems = (arr) => {
 		return arr.map((item)=> {
 			const {id} = item,
@@ -14,52 +28,30 @@ const ItemList = (props) => {
 				<li 
 					key={id}
 					className="list-group-item"
-					onClick={() => props.onItemSelected(id)}
+					onClick={() => onItemSelected(id)}
 				>
 					{lable}
 				</li>
 			)
 		})
 	}
+	
 	const	 List = styled.ul`
 		.list-group-item{
 			cursor: pointer;
 		}
 	`
-	const items = renderItems(props.itemList);
-
-	return <List className=''>{items}</List>;
+	if(error) return <ErrorMessage/>
 	
-}
-ItemList.defaultProps = {
-	onItemSelected: () => {},
+	try{
+		if(!itemList.length) return <Spinner/>;
+		const items = renderItems(itemList);
 	
-}
-const withData = (View, gatData) => {
-	return class extends Component{
-			state = {
-				itemList: null,
-				error: false
-			}
-			UNSAFE_componentWillMount(){
-		
-				const {getData} = this.props;
-		
-				getData()
-					.then((itemList) => this.setState({itemList}))
-					.catch(() => this.setState({error: true}))
-			}
-			componentDidCatch(){
-				this.setState({error: true})
-			}
-		render(){
-			const {itemList} = this.state;
-			if(this.state.error) return <ErrorMessage/>;
-			if(!itemList) return <Spinner/>;
-
-			return <View {...this.props} itemList = {itemList}/>
-	
+		return <List>{items}</List>;
+	}catch(e){
+		updateError(error => error = true);
 	}
-	}
+	
+	
 }
-export default withData(ItemList)
+export default ItemList;
