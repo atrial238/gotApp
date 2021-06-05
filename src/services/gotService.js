@@ -37,7 +37,6 @@ export default class GetResource {
 	getHouse =  async(id) => {
 		
 		const res = await this.fetchResource(`/houses/${id}`);
-		console.log(res)
 		return this._transformHouse(res);
 	}
 	_transformCharacter(char){

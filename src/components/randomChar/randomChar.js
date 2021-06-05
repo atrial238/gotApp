@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import GetResource from '../../services/gotService';
-import Spinner from '../spinner/spinner';
-import ErrorMessage from '../errorMessage/errorMessage';
+import Spinner from '../Spinner/Spinner';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 import PropTypes from 'prop-types';
 
  const RandomChar = ({interval, typeDetailList, titleButton, methodForItem, randomId}) => {

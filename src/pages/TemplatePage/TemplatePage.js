@@ -1,11 +1,9 @@
 import React, {Component} from 'react';
-import ItemList from '../../itemList/itemList';
-import RowBlock from '../../rowBlock/rowBlock';
-import ErrorMessage from '../../errorMessage/errorMessage';
-import GetResource from '../../../services/gotService';
 import {withRouter} from 'react-router-dom';
 import {Col, Row} from 'reactstrap';
-import RandomChar from '../../randomChar/randomChar';
+
+import GetResource from '../../services/gotService';
+import {ErrorMessage, RowBlock, ItemList, RandomChar} from '../../components'
 
 class TemplatePage extends Component {
 
@@ -20,6 +18,7 @@ class TemplatePage extends Component {
 	componentDidCatch(){
 		this.setState({error: true})
 	}
+
 	toggelCardCharacter = () => {
 		this.setState({showHideCard: !this.state.showHideCard})
 	}
@@ -47,7 +46,6 @@ class TemplatePage extends Component {
 																				randomId={this.props.randomId}
 																			/> : null;
 			return 	(
-				<>
 				<Row>
 					<Col lg={{size: 6, offset: 0}} >
 						<RowBlock left={itemList}/>
@@ -57,7 +55,6 @@ class TemplatePage extends Component {
 							<button onClick={this.toggelCardCharacter}>show/hide card with characters</button>
 					</Col>
 				</Row>
-				</>
 			)
 		}else{
 			return null;

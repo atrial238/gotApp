@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import  ItemDetails, {Field} from '../../itemDetails/itemDetails';
-import GetResource from '../../../services/gotService';
+
+import GetResource from '../../services/gotService';
+import {Field, ItemDetails} from '../../components'
 
 export default class HouseItem extends Component {
 

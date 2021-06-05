@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import './itemList.css';
 import styled from 'styled-components';
-import Spinner from '../spinner/spinner';
+import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
 
 const ItemList = (props) => {

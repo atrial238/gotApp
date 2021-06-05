@@ -1,6 +1,6 @@
 import React from 'react';
-import TemplatePage from '../templatePage/templatePage';
-import Spinner from '../../spinner/spinner';
+import TemplatePage from '../TemplatePage/TemplatePage';
+import {Spinner} from '../../components';
 
 
 const BookDetaillsList = (char) => {
@@ -25,11 +25,11 @@ const BookDetaillsList = (char) => {
 	)
 }
 
-const BooksPage = () => <TemplatePage 
+const Books = () => <TemplatePage 
 									titleButton={'Change book'}
 									typeDetailList ={BookDetaillsList} 
 									methodForAllItems = {'getAllBooks'}
 									methodForItem = {'getBook'}
 									randomId = {11}
 								/>;
-export default BooksPage;
+export default Books;

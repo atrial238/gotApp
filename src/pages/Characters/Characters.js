@@ -1,6 +1,6 @@
 import React from 'react';
-import Templatepage from '../templatePage/templatePage';
-import Spinner from '../../spinner/spinner';
+import Templatepage from '../TemplatePage/TemplatePage';
+import {Spinner} from '../../components';
 
 const CharacterDetaillsList = (char) => {
 	const {name, gender, born, died, culture } = char;
@@ -26,12 +26,12 @@ const CharacterDetaillsList = (char) => {
 		</>
 	)
 }
-const  CharactersPage = () =>  <Templatepage 
+const  Characters = () =>  <Templatepage 
 											titleButton={'Change character'}
 											typeDetailList ={CharacterDetaillsList} 
 											methodForAllItems = {'getAllCharacters'}
 											methodForItem = {'getCharacter'}
 											randomId = {140 + 25}
 										/>
-export default CharactersPage;
+export default Characters;
 

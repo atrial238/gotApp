@@ -1,17 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
-import Spinner from '../spinner/spinner';
-import ErrorMessage from '../errorMessage/errorMessage';
+import Spinner from '../Spinner/Spinner';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
-const Field = ({item, field, label}) => {
-		return (
-			<li className="list-group-item d-flex justify-content-between">
-				<span className="term">{label}</span>
-				<span>{item[field]}</span>
-         </li>
-		)
-}
-export {Field};
 
 const ItemDetails = ({getData, itemId, children}) => {
 	const [item, updateItem] = useState( {name: <Spinner/>, gender: <Spinner/>, born:  <Spinner/>, died: <Spinner/>, culture:  <Spinner/>});
@@ -39,7 +30,6 @@ const ItemDetails = ({getData, itemId, children}) => {
 				margin-bottom: 20px;
 				text-align: center;
 			}
-
 	`;
 
 	if(error) return <ErrorMessage/>;

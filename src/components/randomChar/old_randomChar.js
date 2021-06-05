@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import GetResource from '../../services/gotService';
-import Spinner from '../spinner/spinner';
+import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
 import PropTypes from 'prop-types';
 

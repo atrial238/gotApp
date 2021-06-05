@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import './itemList.css';
 import styled from 'styled-components';
-import Spinner from '../spinner/spinner';
-import ErrorMessage from '../errorMessage/errorMessage';
+import Spinner from '../Spinner/Spinner';
+import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const ItemList = ({getData, onItemSelected}) => {
 	const [itemList, updateList] = useState([]);
@@ -11,7 +11,6 @@ const ItemList = ({getData, onItemSelected}) => {
 	useEffect(() => {
 		getData()
 			.then((itemList) => {
-				console.log(itemList)
 				updateList(itemList);
 			})
 			.catch(() => {

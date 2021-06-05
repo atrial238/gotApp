@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
-import Spinner from '../spinner/spinner';
+import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../errorMessage/errorMessage';
 
 const Field = ({item, field, label}) => {
