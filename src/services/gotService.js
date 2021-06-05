@@ -20,6 +20,7 @@ export default class GetResource {
 
 	getCharacter = async (id) => {
 		const res = await this.fetchResource(`/characters/${id}`);
+		
 		return this._transformCharacter(res);
 	}
 	getAllBooks = async () => {

@@ -52,7 +52,7 @@ class TemplatePage extends Component {
 					</Col>
 					<Col lg={{size: 6, offset: 0}}>
 						{characterList}
-							<button onClick={this.toggelCardCharacter}>show/hide card with characters</button>
+						<button onClick={this.toggelCardCharacter}>show/hide card with characters</button>
 					</Col>
 				</Row>
 			)

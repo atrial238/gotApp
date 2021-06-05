@@ -21,7 +21,7 @@ import PropTypes from 'prop-types';
 		let id = Math.floor(Math.random() * randomId);
 		if(!id) ++id;
 		gotService[methodForItem](id)
-			.then((char) =>updateChar(char))
+			.then((char) => console.log(char) || updateChar(char))
 			.catch(() => updateError(error => error = true));
 	}
 	

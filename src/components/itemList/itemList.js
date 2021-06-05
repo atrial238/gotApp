@@ -5,6 +5,7 @@ import Spinner from '../Spinner/Spinner';
 import ErrorMessage from '../ErrorMessage/ErrorMessage';
 
 const ItemList = ({getData, onItemSelected}) => {
+	
 	const [itemList, updateList] = useState([]);
 	const [error, updateError] = useState(false);
 	

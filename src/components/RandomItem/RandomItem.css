@@ -1,0 +1,11 @@
+.random__wrapper {
+	background: white;
+	border-radius: 5px;
+	padding: 10px 0;
+	align-items: flex-start;
+}
+.random__wrapper h4 {
+	padding: 0 10px;
+	display: flex;
+	justify-content: space-between;
+}

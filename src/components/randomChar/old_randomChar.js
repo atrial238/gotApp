@@ -23,7 +23,7 @@ export default class RandomChar extends Component {
 		const gotService = new GetResource();
 		const id = Math.floor(Math.random()*140 + 25);
 		gotService.getCharacter(id)
-			.then((res) => this.onCharLoaded(res))
+			.then((res) => console.log(res) || this.onCharLoaded(res))
 			.catch(this.onError);
 	}
 	UNSAFE_componentWillMount(){

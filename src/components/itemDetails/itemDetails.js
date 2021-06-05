@@ -14,7 +14,7 @@ const ItemDetails = ({getData, itemId, children}) => {
 		}
 		
 		getData(itemId)
-			.then((item) => updateItem(item))
+			.then((item) => console.log(item) || updateItem(item))
 			.catch(() => updateError(error => {
 				
 				error = true}));
