@@ -18,14 +18,14 @@ export default class App extends Component {
 		return (
 			<Router>
 				<div className = "app"> 
-					<Container>	<Header />		</Container>
+					<Container>	<Header /></Container>
 					
 					<Container>
 						<Switch>
-							<Route path='/' exact component={MainPage}/>
-							<Route path="/characters" exact component={Characters}/>
-							<Route path="/houses" exact component={Houses}/>
-							<Route path="/books" exact component={Books}/>
+							<Route exact path='/'  component={MainPage}/>
+							<Route exact path="/characters"  component={Characters}/>
+							<Route exact path="/houses"  component={Houses}/>
+							<Route exact path="/books"  component={Books}/>
 							<Route path="/books/:id" render={({match}) => {
 									const {id} = match.params;
 										return <BooksItem bookId ={id}/>
