@@ -1,6 +1,8 @@
 import React from 'react';
+import { Paginator } from '..';
+import './ListTitles.css';
 
-const ListTitles = ({titles, handleClickOnTitle}) => {
+const ListTitles = ({titles, handleClickOnTitle, isPaginatorNeeded, handlePagination}) => {
 
 	const titlesElem = titles.map(el => 
 		<li 
@@ -13,7 +15,11 @@ const ListTitles = ({titles, handleClickOnTitle}) => {
 	)
 
 	return (
-		<ul>{titlesElem}</ul>
+		<div className='wrapper_list_items'>
+			{isPaginatorNeeded && <Paginator handlePagination={handlePagination}/>}
+			<ul>{titlesElem}</ul>
+		</div>
+		
 	)
 }
 export default ListTitles;

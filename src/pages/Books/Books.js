@@ -13,6 +13,7 @@ const Books = () => {
 				partPathForSpecificItem='books' 
 				titleItem='book'
 				numberForRundom={9}
+				isPaginatorNeeded={false}
 	 		/>
 }
 export default Books;

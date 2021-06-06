@@ -9,6 +9,10 @@
 	display: flex;
 	justify-content: space-between;
 }
+.random__wrapper h4 span:first-child {
+
+	margin-right: 10px;
+}
 .random_button {
 	display: flex;
 	justify-content: flex-end;

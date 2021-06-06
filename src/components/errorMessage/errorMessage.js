@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import img from './error.jpg'
+import img from '../../assets/img/error.jpg';
 
 export default function ErrorMessage(){
 	const Error  = styled.div`

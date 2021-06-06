@@ -7,12 +7,22 @@ const HeaderBlock = styled.div`
     justify-content: space-between;
     align-items: center;
     height: 80px;
+	 @media (max-width: 600px){
+		flex-direction: column;
+		justify-content: center;
+	 }
 `;
 
 const HeaderTitle = styled.h3`
-    font-size: 24px;
+    font-size: 2rem;
     color: #fff;
     margin: 0;
+	 @media (max-width: 600px){
+		margin-bottom: 10px;
+	 }
+	 @media (max-width: 600px){
+		/* ont-size: 2.5rem; */
+	 }
 `;
 
 const HeaderLinks = styled.ul`
@@ -21,9 +31,41 @@ const HeaderLinks = styled.ul`
     align-items: center;
     color: #fff;
     list-style-type: none;
+	 @media (max-width: 600px){
+		margin-bottom: 10px;
+	 }
     li {
         margin-right: 20px;
         font-size: 18px;
+		  &:last-child {
+			  margin-right: 0;
+		  }
+		  a {
+			  position: relative;
+			  &:after{
+					content: '';
+					position: absolute;
+					width: 100%;
+					height: 1px;
+					bottom: -2px;
+					left: 0;
+					transform: scale(0);
+					transition: all .4s;
+					background: white;
+			  }
+			  &:hover {
+				  &:after {
+					  transform: scale(1);
+				  }
+			  }
+			  @media (hover: none) and (pointer: coarse) {
+				&:hover {
+				  &:after {
+					  transform: scale(0);
+				  }
+			  }
+			  }
+		  }
     }
 `;
 
@@ -31,20 +73,12 @@ const Header = () => {
     return (
         <HeaderBlock>
             <HeaderTitle>
-                <Link  to ='/'>
-                Game of Thrones DB
-                </Link>
+                <Link  to ='/'>Game of Thrones DB</Link>
             </HeaderTitle>
             <HeaderLinks>
-                <li>
-                    <Link to="/characters/">Characters</Link>
-                </li>
-                <li>
-                    <Link to="/houses/">Houses</Link>
-                </li>
-                <li>
-                    <Link to='/books/'>Books</Link>   
-                </li>
+                <li><Link to="/characters/">Characters</Link></li>
+                <li><Link to="/houses/">Houses</Link></li>
+                <li><Link to='/books/'>Books</Link></li>
             </HeaderLinks>
         </HeaderBlock>
     );

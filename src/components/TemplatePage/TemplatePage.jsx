@@ -4,7 +4,8 @@ import { useHistory } from 'react-router';
 
 import {ErrorMessage, ListTitles, Preloader, RandomItem} from '../../components';
 
-const TemplatePage = ({methodSpecificAPI, methodAllItemsAPI, partPathForSpecificItem, titleItem, numberForRundom}) => {
+const TemplatePage = ({methodSpecificAPI, methodAllItemsAPI, partPathForSpecificItem, 
+	titleItem, numberForRundom, isPaginatorNeeded}) => {
 	const history = useHistory();
 
 	const [items, setItems] = useState([]);
@@ -13,7 +14,9 @@ const TemplatePage = ({methodSpecificAPI, methodAllItemsAPI, partPathForSpecific
 	const [isError, setIsError] = useState(false);
 	const [isGetAllItemsFailed, setIsGetAllItemsFailed] = useState(false);
 	const [isLoadingAllItems, setIsLoadingAllItems] = useState(true);
+	const [page, setPage] = useState(4);
 
+	//get the specific items from server
 	const getSpecificItem = () => {
 		const getRandomId = () => Math.floor(Math.random() * numberForRundom) + 1;
 		setIsError(false);
@@ -23,6 +26,7 @@ const TemplatePage = ({methodSpecificAPI, methodAllItemsAPI, partPathForSpecific
 			.catch(() => setIsError(true) || setIsLoading(false));
 	};
 	
+	//get all itmes and the specific intems from the server.
 	useEffect(() => {
 		setIsGetAllItemsFailed(false);
 		setIsLoadingAllItems(true);
@@ -30,11 +34,22 @@ const TemplatePage = ({methodSpecificAPI, methodAllItemsAPI, partPathForSpecific
 			.then(res => setItems(res) || setIsLoadingAllItems(false))
 			.catch(() =>setIsGetAllItemsFailed(true) || setIsLoadingAllItems(false));
 
-		getSpecificItem()
+		getSpecificItem(page)
 		const idInerval = setInterval(getSpecificItem, 20000);
 		return () => clearInterval(idInerval);
-	}, [])
+	}, []);
 	
+	//handle paginatioin when page change
+	useEffect(() => {
+		setIsGetAllItemsFailed(false);
+		setIsLoadingAllItems(true);
+		methodAllItemsAPI(page)
+			.then(res => setItems(res) || setIsLoadingAllItems(false))
+			.catch(() =>setIsGetAllItemsFailed(true) || setIsLoadingAllItems(false));
+	},[page]);
+
+	const handlePagination = (number) => setPage(page + number);
+
 	const handleClickOnTitle = id => history.push(`/${partPathForSpecificItem}/${id}`);
 
 	return (
@@ -44,7 +59,12 @@ const TemplatePage = ({methodSpecificAPI, methodAllItemsAPI, partPathForSpecific
 					? <div  className='preloader'><Preloader/></div>
 					: isGetAllItemsFailed 
 					? <ErrorMessage/>
-					: <ListTitles titles={items} handleClickOnTitle={handleClickOnTitle}/>
+					: <ListTitles 
+							titles={items} 
+							handleClickOnTitle={handleClickOnTitle} 
+							isPaginatorNeeded={isPaginatorNeeded}
+							handlePagination={handlePagination}
+						/>
 				}
 			</Col>
 			<Col md='6'>

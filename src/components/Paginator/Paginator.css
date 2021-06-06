@@ -1,0 +1,28 @@
+.wraper_paginator {
+	display: flex;
+	justify-content: space-between;
+	padding: 10px;
+}
+.wraper_paginator button {
+	padding: .3rem 1.4rem;
+	background-color: #A8B5BD;
+	border-radius: 3px;
+	box-shadow: 1px 1px 6px;
+	transition: all 0.1s;
+	border: none;
+	transition: all .4s;
+}
+.wraper_paginator button:hover {
+	transform: translate(1px, 1px);
+	box-shadow: 1px 1px 1px;
+}
+.wraper_paginator button:focus {
+	outline: none;
+	border: none;
+}
+@media (hover: none) and (pointer: coarse) {
+	.wraper_paginator button:hover {
+		transform: translate(0px, 0px);
+		box-shadow: 1px 1px 6px;
+	}
+}

@@ -13,8 +13,8 @@ export default class GetResource {
 		return await res.json();
 	}
 
-	getAllCharacters = async () => {
-		const res =  await  this.fetchResource('/characters?page=5&pageSize=10');
+	getAllCharacters = async (page = 4) => {
+		const res =  await  this.fetchResource(`/characters?page=${page}&pageSize=10`);
 		return res.map(this._transformCharacter)
 	}
 

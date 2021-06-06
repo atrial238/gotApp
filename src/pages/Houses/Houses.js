@@ -15,6 +15,7 @@ const Houses = () => {
 				partPathForSpecificItem='houses' 
 				titleItem='house'
 				numberForRundom={9}
+				isPaginatorNeeded={false}
 	 		/>
 }
 export default Houses;

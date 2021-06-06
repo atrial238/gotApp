@@ -12,6 +12,7 @@ const Characters = () => {
 				partPathForSpecificItem='characters' 
 				titleItem='character'
 				numberForRundom={100}
+				isPaginatorNeeded={true}
 			/>
 }
 export default Characters;
