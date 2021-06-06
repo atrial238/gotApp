@@ -1,22 +1,13 @@
-import React, {Component} from 'react';
+import React from 'react';
 
 import GetResource from '../../services/gotService';
-import {Field, ItemDetails} from '../../components'
+import { SpecificItem} from '../../components'
 
-export default class CharacterItem extends Component {
+const CharacterItem = () => {
+	const {getCharacter} = new GetResource();
 
-	getService = new GetResource();
-	render(){
-		return (
-			<ItemDetails
-				itemId = {this.props.characterId}
-				getData = {this.getService.getCharacter}
-			 >
-				<Field field='gender' label='Gender' />
-				<Field field='born' label='Born' />
-				<Field field='died' label='Died' />
-				<Field field='culture' label='Culture' />
-			</ItemDetails>
-		)
-	}
+	return <SpecificItem methodAPI={getCharacter}/>
 }
+export default CharacterItem;
+
+
