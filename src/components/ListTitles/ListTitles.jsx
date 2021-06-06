@@ -8,7 +8,7 @@ const ListTitles = ({titles, handleClickOnTitle}) => {
 			className="list-group-item" 
 			onClick={() => handleClickOnTitle(el.id)}
 		>
-			{el.name}
+			<span className='title_for_titleList'>{el.name}</span>
 		</li>
 	)
 

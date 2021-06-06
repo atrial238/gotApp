@@ -9,4 +9,5 @@ export {default as NoMatch} from './NoMatch/NoMatch';
 export {default as Field} from './Field/Field';
 export {default as ListTitles} from './ListTitles/ListTitles';
 export {default as RandomItem} from './RandomItem/RandomItem';
+export {default as Preloader} from './Preloader/Preloader';
 

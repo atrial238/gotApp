@@ -4,32 +4,31 @@ import { useHistory } from 'react-router';
 
 
 import TemplatePage from '../TemplatePage/TemplatePage';
-import {ListTitles, RandomItem, RowBlock, Spinner} from '../../components';
+import {ListTitles, Preloader, RandomItem, RowBlock, Spinner} from '../../components';
 import GetResource from '../../services/gotService';
 
+// const BookDetaillsList = (char) => {
+// 	const {name, numberOfPages, publiser, released } = char;
+// 	const Field = ({field, label}) => {
+// 		return (
+// 			<li className="list-group-item d-flex justify-content-between">
+// 				<span className="term">{label || <Spinner/>}</span>
+// 				<span>{field || <Spinner/>}</span>
+// 			</li>
+// 		)
+// 	}
 
-const BookDetaillsList = (char) => {
-	const {name, numberOfPages, publiser, released } = char;
-	const Field = ({field, label}) => {
-		return (
-			<li className="list-group-item d-flex justify-content-between">
-				<span className="term">{label || <Spinner/>}</span>
-				<span>{field || <Spinner/>}</span>
-			</li>
-		)
-	}
-
-	return (
-		<>
-		 	<h4><span>Random book:</span> <span>{name || <Spinner/>}</span></h4>
-			<ul className="list-group list-group-flush">
-				<Field label={'NumberOfPages'} field={numberOfPages}/>
-				<Field label={'Publiser'} field={publiser}/>
-				<Field label={'Released'} field={released}/>
-			</ul>
-		</>
-	)
-}
+// 	return (
+// 		<>
+// 		 	<h4><span>Random book:</span> <span>{name || <Spinner/>}</span></h4>
+// 			<ul className="list-group list-group-flush">
+// 				<Field label={'NumberOfPages'} field={numberOfPages}/>
+// 				<Field label={'Publiser'} field={publiser}/>
+// 				<Field label={'Released'} field={released}/>
+// 			</ul>
+// 		</>
+// 	)
+// }
 
 const Books = () => {
 	const history = useHistory();
@@ -51,14 +50,16 @@ const Books = () => {
 	}, [])
 	
 	const handleClickOnTitle = id => history.push(`/books/${id}`);
+
 	return (
-		
 		<Row>
 			<Col md='6'>
-				<ListTitles titles={books} handleClickOnTitle={handleClickOnTitle}/>
+				{(books.length && <ListTitles titles={books} handleClickOnTitle={handleClickOnTitle}/>)
+					|| <div  className='preloader'><Preloader/></div>}
 			</Col>
 			<Col md='6'>
-				<RandomItem title='book' specificItem={specificBook} />
+				{(specificBook && <RandomItem title='book' specificItem={specificBook} />) 
+					|| <div  className='preloader'><Preloader/></div>}
 			</Col>
 		</Row>
 		// <TemplatePage 
