@@ -1,0 +1,8 @@
+.wrapper_specific_item {
+	background: white;
+	border-radius: 5px;
+	padding: 10px;
+}
+.wrapper_specific_item h4 {
+	text-align: center;
+}

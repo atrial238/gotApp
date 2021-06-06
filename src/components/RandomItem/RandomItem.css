@@ -9,3 +9,27 @@
 	display: flex;
 	justify-content: space-between;
 }
+.random_button {
+	display: flex;
+	justify-content: flex-end;
+	padding: 5px 10px;
+}
+.random_button button {
+	padding: 5px 20px;
+	background-color: #A8B5BD;
+	border-radius: 3px;
+	box-shadow: 1px 1px 6px;
+	transition: all 0.1s;
+	border: none;
+	transition: all .4s;
+}
+.random_button button:hover {
+	transform: translate(1px, 1px);
+	box-shadow: 1px 1px 1px;
+}
+@media (hover: none) and (pointer: coarse) {
+	.random_button button:hover {
+		transform: translate(0px, 0px);
+		box-shadow: 1px 1px 6px;
+	}
+}

@@ -28,3 +28,8 @@
 .title_for_titleList:hover:after {
 	transform: scale(1);
 }
+@media (hover: none) and (pointer: coarse) {
+	.title_for_titleList:hover:after {
+		transform: scale(0);
+	}
+}

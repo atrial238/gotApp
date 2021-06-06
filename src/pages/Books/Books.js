@@ -2,33 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Col, Row } from 'reactstrap';
 import { useHistory } from 'react-router';
 
-
-import TemplatePage from '../TemplatePage/TemplatePage';
-import {ListTitles, Preloader, RandomItem, RowBlock, Spinner} from '../../components';
+import {ErrorMessage, ListTitles, Preloader, RandomItem} from '../../components';
 import GetResource from '../../services/gotService';
 
-// const BookDetaillsList = (char) => {
-// 	const {name, numberOfPages, publiser, released } = char;
-// 	const Field = ({field, label}) => {
-// 		return (
-// 			<li className="list-group-item d-flex justify-content-between">
-// 				<span className="term">{label || <Spinner/>}</span>
-// 				<span>{field || <Spinner/>}</span>
-// 			</li>
-// 		)
-// 	}
-
-// 	return (
-// 		<>
-// 		 	<h4><span>Random book:</span> <span>{name || <Spinner/>}</span></h4>
-// 			<ul className="list-group list-group-flush">
-// 				<Field label={'NumberOfPages'} field={numberOfPages}/>
-// 				<Field label={'Publiser'} field={publiser}/>
-// 				<Field label={'Released'} field={released}/>
-// 			</ul>
-// 		</>
-// 	)
-// }
 
 const Books = () => {
 	const history = useHistory();
@@ -37,15 +13,29 @@ const Books = () => {
 
 	const [books, setBooks] = useState([]);
 	const [specificBook, setSpecificBook] = useState();
-	
+	const [isLoading, setIsLoading] = useState(true);
+	const [isError, setIsError] = useState(false);
+	const [isGetAllBooksFailed, setIsGetAllBooksFailed] = useState(false);
+	const [isLoadingAllBooks, setIsLoadingAllBooks] = useState(true);
 
-	const getRandomId = () => Math.floor(Math.random() * 9) + 1;
-	const getSpecificBook = () =>	getBook(getRandomId()).then(res => setSpecificBook(res));
+	const getSpecificBook = () => {
+		const getRandomId = () => Math.floor(Math.random() * 9) + 1;
+		setIsError(false);
+		setIsLoading(true);
+		getBook(getRandomId())
+			.then(res => setSpecificBook(res) || setIsLoading(false))
+			.catch(() => setIsError(true) || setIsLoading(false));
+	};
 	
 	useEffect(() => {
-		getAllBooks().then(res => setBooks(res));
+		setIsGetAllBooksFailed(false);
+		setIsLoadingAllBooks(true);
+		getAllBooks()
+			.then(res => setBooks(res) || setIsLoadingAllBooks(false))
+			.catch(() =>setIsGetAllBooksFailed(true) || setIsLoadingAllBooks(false));
+
 		getSpecificBook()
-		const idInerval = setInterval(getSpecificBook, 10000);
+		const idInerval = setInterval(getSpecificBook, 20000);
 		return () => clearInterval(idInerval);
 	}, [])
 	
@@ -54,21 +44,22 @@ const Books = () => {
 	return (
 		<Row>
 			<Col md='6'>
-				{(books.length && <ListTitles titles={books} handleClickOnTitle={handleClickOnTitle}/>)
-					|| <div  className='preloader'><Preloader/></div>}
+				{isLoadingAllBooks
+					? <div  className='preloader'><Preloader/></div>
+					: isGetAllBooksFailed 
+					? <ErrorMessage/>
+					: <ListTitles titles={books} handleClickOnTitle={handleClickOnTitle}/>
+				}
 			</Col>
 			<Col md='6'>
-				{(specificBook && <RandomItem title='book' specificItem={specificBook} />) 
-					|| <div  className='preloader'><Preloader/></div>}
+				{isLoading 
+					? <div className='preloader'><Preloader/></div>
+					: isError
+					? <ErrorMessage/>
+					: <RandomItem title='book' specificItem={specificBook} hanleClickChangeItem={getSpecificBook}/>
+				}
 			</Col>
 		</Row>
-		// <TemplatePage 
-		// 	titleButton={'Change book'}
-		// 	typeDetailList ={BookDetaillsList} 
-		// 	methodForAllItems = {'getAllBooks'}
-		// 	methodForItem = {'getBook'}
-		// 	randomId = {11}
-		// />
 	)
 }
 export default Books;
