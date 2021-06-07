@@ -64,13 +64,6 @@ const HeaderLinks = styled.ul`
 						transform: scale(1);
 					}
 			  }
-			  @media (hover: none) and (pointer: coarse) {
-				&:hover {
-				  &:after {
-					  transform: scale(0);
-				  }
-			  }
-			  }
 		  }
     }
 `;
