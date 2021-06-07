@@ -30,7 +30,7 @@ const MainPage = () => {
 				background: white;
 				position: absolute;
 				padding: .3rem 5rem;
-				bottom: 5rem;
+				bottom: 7rem;
 				left: 50%;
 				transform: translate(-50%, 0%);
 				transform-origin: 50% 50%;
