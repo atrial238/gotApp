@@ -1,4 +1,4 @@
-export {default as ErrorMessage} from './ErrorMessage/ErrorMessage';
+export {default as ErrorMessage} from './Error/Error';
 export {default as Header} from './Header/Header';
 export {default as NoMatch} from './NoMatch/NoMatch';
 export {default as ListTitles} from './ListTitles/ListTitles';
