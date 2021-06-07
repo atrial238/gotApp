@@ -86,7 +86,7 @@ const MainPage = () => {
 		button.current.style.transform = 'rotateX(90deg) translate(-50%, 0%)';
 		gateLeft.current.style.transform = 'translateX(-120%)';
 		gateRight.current.style.transform = 'translateX(120%)';
-		setTimeout(() => history.push("/characters"), 1500)
+		setTimeout(() => history.push("/characters/"), 1500)
 	}
 
 	return (

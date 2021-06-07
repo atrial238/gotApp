@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
+import {Link, useLocation} from 'react-router-dom';
 
 const HeaderBlock = styled.div`
     display: flex;
@@ -58,6 +58,12 @@ const HeaderLinks = styled.ul`
 					  transform: scale(1);
 				  }
 			  }
+			  &.active_link {
+				  cursor: auto;
+					&:after {
+						transform: scale(1);
+					}
+			  }
 			  @media (hover: none) and (pointer: coarse) {
 				&:hover {
 				  &:after {
@@ -70,15 +76,32 @@ const HeaderLinks = styled.ul`
 `;
 
 const Header = () => {
+	let classActiveChar = '', classActiveHouses = '', classActiveBooks = '';
+
+	const {pathname} = useLocation();
+
+	switch(pathname){
+		case '/characters/':
+			classActiveChar = 'active_link';
+			break;
+		case '/houses/':
+			classActiveHouses = 'active_link';
+			break;
+		case '/books/':
+			classActiveBooks = 'active_link';
+			break;
+		default:
+
+	}
     return (
         <HeaderBlock>
             <HeaderTitle>
                 <Link  to ='/'>Game of Thrones DB</Link>
             </HeaderTitle>
             <HeaderLinks>
-                <li><Link to="/characters/">Characters</Link></li>
-                <li><Link to="/houses/">Houses</Link></li>
-                <li><Link to='/books/'>Books</Link></li>
+                <li><Link to="/characters/" className={classActiveChar} >Characters</Link></li>
+                <li><Link to="/houses/" className={classActiveHouses} >Houses</Link></li>
+                <li><Link to='/books/' className={classActiveBooks} >Books</Link></li>
             </HeaderLinks>
         </HeaderBlock>
     );
